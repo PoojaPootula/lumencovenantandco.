@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        {% block title %}
+        Lumen Covenant & Co.
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    {% include 'includes/navbar.html' %}
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main> 
+    {% include 'includes/footer.html' %}
+
+</body>
+</html>

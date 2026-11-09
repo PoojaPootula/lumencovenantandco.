@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="container">
+
+    <h1>Manage Cards</h1>
+    <div class="admin-form-card">
+
+        <h2>Add New Card</h2>
+
+        <form method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Card Name</label>
+                <input type="text" name="name" placeholder="Card Name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Short Description</label>
+                <textarea name="description" placeholder="Description"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Front Image</label>
+                <input type="file" name="front_image">
+            </div>
+
+            <div class="form-group">
+                <label>Inside Left Image</label>
+                <input type="file" name="inside_left_image">
+
+            </div>
+            <div class="form-group">
+                <label>Inside Right Image</label>
+                <input type="file" name="inside_right_image">
+            </div>
+            <div class="form-group">
+                <label>Back Image</label>
+                <input type="file" name="back_image">
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" name="featured">
+                Featured
+            </div>
+
+            <label>
+                <input type="checkbox" name="active" checked>
+                Active
+            </label>
+
+            <button type="submit">
+                Save Card
+            </button>
+
+        </form>
+    </div>
+
+    <div class="existing-cards">
+        <h2>Existing Cards</h2>
+
+        {% for card in cards %}
+
+        <div class="card-item">
+
+            <h3>{{ card.name }}</h3>
+            <p>{{ card.short_description }}</p>
+
+            <div class="badges">
+                {% if card.featured %} ⭐ Featured {% endif %}
+
+                {% if card.active %} ✅ Active {% else %} ❌ Inactive {% endif %}
+            </div>
+
+            <div class="image-grid">
+
+                {% if card.front_image %}
+                <img src="{{ url_for('static', filename='uploads/cards/' + card.front_image) }}" alt="Front">
+                {% endif %}
+
+                {% if card.inside_left_image %}
+                <img src="{{ url_for('static', filename='uploads/cards/' + card.inside_left_image) }}" alt="Inside Left">
+                {% endif %}
+
+                {% if card.inside_right_image %}
+                <img src="{{ url_for('static', filename='uploads/cards/' + card.inside_right_image) }}"
+                    alt="Inside Right">
+                {% endif %}
+
+                {% if card.back_image %}
+                <img src="{{ url_for('static', filename='uploads/cards/' + card.back_image) }}" alt="Back">
+                {% endif %}
+            </div>
+
+            <div class="card-actions">
+
+                <a class="btn-edit" href="{{ url_for('edit_card', card_id=card.id) }}">
+                    Edit
+                </a>
+
+                <form action="{{ url_for('delete_card', card_id=card.id) }}" method="POST">
+
+                    <button class="btn-delete" type="submit" onclick="return confirm('Delete this card?');">
+                        Delete
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+    </div>
+
+</section>
+
+{% endblock %}s
