@@ -29,35 +29,120 @@ Lumen Covenant & Co. | Paperie & Celebrations
 </section>
 
 <section id="collections">
+    <section id="about">
+
+        <div class="container">
+            <p class="story-intro">
+                ✦ Thoughtfully crafted for meaningful moments ✦</p>
+
+            <h2>Our Story</h2>
+
+            <p>
+                Every celebration begins with a feeling.
+            </p>
+            <p>
+                A birthday remembered with a handwritten note.
+                A wedding favour gifted with gratitude.
+                A message cherished long after the occasion has passed.
+            </p>
+
+            <p>
+                At Lumen Covenant & Co., we believe beautiful paper goods
+                transform ordinary moments into meaningful keepsakes.
+            </p>
+
+            <p>
+                From greeting cards and return gift cards to personalized
+                creations crafted for your unique story, every piece is
+                thoughtfully designed to bring warmth, joy and elegance
+                to life's treasured occasions.
+            </p>
+
+            <p>
+                Because some moments deserve more than a message.
+                They deserve to be remembered.
+            </p>
+
+        </div>
+
+    </section>
     <div class="container">
+        <h2>Browse Collections</h2>
+        <div class="collection-tabs">
+            <button class="collection-tab">
+                Greeting Cards
+            </button>
 
-        <h2>Curated Collections</h2>
+            <button class="collection-tab">
+                Return Gift Cards
+            </button>
 
-        <div class="collection-grid">
-
-            <div class="collection-card">
-                <h3>Greeting Cards</h3>
-                <p>Thoughtful designs for birthdays, anniversaries and special occasions.</p>
-            </div>
-
-            <div class="collection-card">
-                <h3>Return Gift Cards</h3>
-                <p>Elegant finishing touches for memorable celebrations.</p>
-            </div>
-
-            <div class="collection-card">
-                <h3>Personalized Cards</h3>
-                <p>Created exclusively for your special moments.</p>
-            </div>
-
-            <div class="collection-card">
-                <h3>Celebration Essentials</h3>
-                <p>Premium paper details for events and gatherings.</p>
-            </div>
+            <button class="collection-tab">
+                Personalized Cards
+            </button>
 
         </div>
 
     </div>
+
+    <div class="carousel-container">
+
+        <div class="carousel-card" left-card>
+            <img src="{{ url_for('static', filename='images/anniversary.png') }}" alt="Anniversary Cards">
+            Anniversary Cards
+        </div>
+
+        <div class="carousel-card" center-card>
+            <img src="{{ url_for('static', filename='images/birthday.png') }}" alt="Birthday Cards">
+            Birthday Cards
+        </div>
+
+        <div class="carousel-card" right-card>
+            <img src="{{ url_for('static', filename='images/christmas.png') }}" alt="Christmas Cards">
+            Christmas Cards
+        </div>
+
+    </div>
+
+</section>
+
+<section id="contact">
+
+    <div class="container">
+
+        <h2>Let's Create Something Meaningful</h2>
+
+        <p>
+            We'd love to help you celebrate life's meaningful moments:
+        </p>
+
+        <div class="occasion-list">
+
+            <div class="occasion-item">
+                🎂 Birthdays
+            </div>
+
+            <div class="occasion-item">
+                💍 Weddings
+            </div>
+
+            <div class="occasion-item">
+                🎁 Return Gifts
+            </div>
+
+            <div class="occasion-item">
+                💌 Personalized Creations
+            </div>
+
+        </div>
+
+        <p>
+            Whether you're planning a celebration or creating something uniquely yours,
+            we'd love to hear your story.
+        </p>
+
+    </div>
+
 </section>
 
 {% endblock %}

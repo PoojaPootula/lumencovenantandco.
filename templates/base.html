@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>
         {% block title %}
@@ -7,8 +8,9 @@
         {% endblock %}
     </title>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
@@ -17,8 +19,14 @@
     <main>
         {% block content %}
         {% endblock %}
-    </main> 
+    </main>
     {% include 'includes/footer.html' %}
 
+    <button id="backToTop"> ✧
+    </button>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
 </body>
+
 </html>
