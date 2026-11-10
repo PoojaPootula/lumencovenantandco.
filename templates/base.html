@@ -8,8 +8,7 @@
         {% endblock %}
     </title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
@@ -26,6 +25,45 @@
     </button>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        const tabs = document.querySelectorAll(".collection-tab");
+        const cards = document.querySelectorAll(".collection-card");
+
+        tabs.forEach(tab => {
+
+            tab.addEventListener("click", () => {
+
+                tabs.forEach(t => t.classList.remove("active"));
+                tab.classList.add("active");
+
+                const selectedCategory =
+                    tab.dataset.category;
+
+                cards.forEach(card => {
+
+                    if (
+                        card.dataset.category ===
+                        selectedCategory
+                    ) {
+                        card.style.display = "block";
+                    } else {
+                        card.style.display = "none";
+                    }
+
+                });
+
+            });
+
+        });
+
+    </script>
+    <script>
+
+document.querySelector(
+    '.collection-tab.active'
+).click();
+
+</script>
 
 </body>
 

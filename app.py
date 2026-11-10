@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from models import db, Card
+from models import db, Card, Collection
 import os
 from werkzeug.utils import secure_filename
 
@@ -32,8 +32,29 @@ def save_image(image_file):
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    collections = Collection.query.all()
 
+    return render_template("home.html", collections=collections)
+
+@app.route("/admin/collections", methods=["GET", "POST"])
+def admin_collections():
+    if request.method == "POST":
+        cover_filename = save_image(request.files.get("cover_photo"))
+
+        collection = Collection(
+            name=request.form["name"],
+            category=request.form["category"],
+            cover_photo=cover_filename
+        )
+
+        db.session.add(collection)
+        db.session.commit()
+
+        return redirect(url_for("admin_collections"))
+
+    collections = Collection.query.all()
+
+    return render_template("admin/collections.html", collections=collections)
 
 @app.route("/admin/cards", methods=["GET", "POST"])
 def admin_cards():
@@ -47,12 +68,13 @@ def admin_cards():
 
         card = Card(
             name=request.form["name"],
-            short_description=request.form["description"],
+            description=request.form["description"],
+            category=request.form["category"],
 
             front_image=front_filename,
             inside_left_image=left_filename,
             inside_right_image=right_filename,
-            back_image=back_filename,
+            back_image=back_filename,            
 
             featured="featured" in request.form,
             active="active" in request.form
@@ -64,11 +86,9 @@ def admin_cards():
         return redirect(url_for("admin_cards"))
 
     cards = Card.query.all()
+    collections = Collection.query.all()
 
-    return render_template(
-        "admin/cards.html",
-        cards=cards
-    )
+    return render_template("admin/cards.html", cards=cards, collections=collections)
 
 @app.route("/admin/cards/<int:card_id>/edit",
            methods=["GET", "POST"])

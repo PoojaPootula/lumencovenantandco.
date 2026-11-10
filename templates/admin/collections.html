@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1>Manage Collections</h1>
+
+    <div class="admin-form-card">
+
+        <h2>Add Collection</h2>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label>Collection Name</label>
+
+                <input type="text" name="name" placeholder="Birthday Cards" required>
+            </div>
+
+            <div class="form-group">
+                <label>Category</label>
+
+                <select name="category">
+
+                    <option>
+                        Greeting Cards
+                    </option>
+
+                    <option>
+                        Return Gift Cards
+                    </option>
+
+                    <option>
+                        Personalized Cards
+                    </option>
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Cover Image</label>
+
+                <input type="file" name="cover_photo">
+            </div>
+
+            <button type="submit">
+                Save Collection
+            </button>
+
+        </form>
+
+        <hr>
+
+        <h2>Existing Collections</h2>
+
+        {% for collection in collections %}
+
+        <div>
+
+            <strong>{{ collection.name }}</strong>
+
+            <p>{{ collection.category }}</p>
+
+            {% if collection.cover_photo %}
+                <img src="{{ url_for('static', filename='uploads/cards/' + collection.cover_photo) }}"
+                    alt="Cover Photo">
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -14,21 +14,17 @@
                 <label>Card Name</label>
                 <input type="text" name="name" placeholder="Card Name" required>
             </div>
-
             <div class="form-group">
                 <label>Short Description</label>
                 <textarea name="description" placeholder="Description"></textarea>
             </div>
-
             <div class="form-group">
                 <label>Front Image</label>
                 <input type="file" name="front_image">
             </div>
-
             <div class="form-group">
                 <label>Inside Left Image</label>
                 <input type="file" name="inside_left_image">
-
             </div>
             <div class="form-group">
                 <label>Inside Right Image</label>
@@ -37,6 +33,17 @@
             <div class="form-group">
                 <label>Back Image</label>
                 <input type="file" name="back_image">
+            </div>
+
+            <div class="form-group">
+                <label>Category</label>
+                <select name="category">
+                    {% for collection in collections %}
+                    <option value="{{ collection.name }}">
+                        {{ collection.name }}
+                    </option>
+                    {% endfor %}
+                </select>
             </div>
 
             <div class="checkbox-group">
@@ -64,7 +71,7 @@
         <div class="card-item">
 
             <h3>{{ card.name }}</h3>
-            <p>{{ card.short_description }}</p>
+            <p>{{ card.description }}</p>
 
             <div class="badges">
                 {% if card.featured %} ⭐ Featured {% endif %}
@@ -79,7 +86,8 @@
                 {% endif %}
 
                 {% if card.inside_left_image %}
-                <img src="{{ url_for('static', filename='uploads/cards/' + card.inside_left_image) }}" alt="Inside Left">
+                <img src="{{ url_for('static', filename='uploads/cards/' + card.inside_left_image) }}"
+                    alt="Inside Left">
                 {% endif %}
 
                 {% if card.inside_right_image %}
@@ -115,4 +123,4 @@
 
 </section>
 
-{% endblock %}s
+{% endblock %}
