@@ -15,10 +15,6 @@ Lumen Covenant & Co. | Paperie & Celebrations
             Paperie & Celebrations
         </p>
 
-        <p class="hero-subtitle">
-            Greeting Cards • Return Gift Cards • Personalized Keepsakes
-        </p>
-
         <!-- <p class="hero-description">
             Elegant greeting cards, return gift cards,
             and personalized paper goods created for
@@ -140,6 +136,42 @@ Lumen Covenant & Co. | Paperie & Celebrations
     </div>
 
 </section>
+<div class="gift-box" onclick="openGiftOffer()">
+    🎁
+</div>
+
+<div id="gift-modal" class="gift-modal">
+    <div class="gift-modal-content">
+        <span class="close-gift" onclick="closeGiftOffer()">
+            &times;
+        </span>
+
+        <h2>🎁 Special Offer</h2>
+        <p> Buy 5 Greeting Cards and receive 1 complimentary card.</p>
+
+        <a href="https://wa.me/919705518077?text=Hello,%20I%20am%20interested%20in%20your%20special%20offer."
+           target="_blank" class="whatsapp-btn">
+            Enquire Now
+        </a>
+    </div>
+</div>
+<script>
+
+function openGiftOffer() {
+    document.getElementById("gift-modal").style.display = "flex";
+
+    document.body.classList.add("celebrate");
+
+    setTimeout(() => {
+        document.body.classList.remove("celebrate");
+    }, 1000);
+}
+
+function closeGiftOffer() {
+    document.getElementById("gift-modal").style.display = "none";
+}
+
+</script>
 <section id="contact">
 
     <div class="container">
