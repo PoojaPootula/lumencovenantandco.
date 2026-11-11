@@ -347,6 +347,19 @@ section {
     text-decoration: none;
     color: inherit;
 }
+.detail-gallery {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+}
+.detail-gallery img {
+    width: 220px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 16px;
+}
 
 .collection-banner {
 
@@ -693,11 +706,38 @@ footer {
     padding: 2rem;
     text-align: center;
 }
+.social-links {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 2rem;
+
+    margin: 1.5rem 0;
+}
+.social-links a:hover {
+
+    color: var(--gold);
+
+    transform: translateY(-3px);
+}
+.social-links a {
+
+    font-size: 1.8rem;
+
+    color: white;
+
+    transition: all .3s ease;
+}
 
 @media (max-width: 768px) {
 
     .collection-banner h1 {
         font-size: 3rem;
+    }
+
+    .collection-grid {
+        justify-content: center;
     }
 
     .collection-tabs {

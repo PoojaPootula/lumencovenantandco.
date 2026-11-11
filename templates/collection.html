@@ -3,29 +3,37 @@
 {% block content %}
 
 <section class="container">
+
     <section class="collection-banner">
 
-    {% if cards and cards[0].category %}
         <div class="ribbon-wrapper">
-            <div class="ribbon"> {{ collection_name }}  </div>
-
+            <div class="ribbon">{{ collection_name }}</div>
         </div>
-        <p>
-            Thoughtfully crafted designs for memorable moments.
-        </p>
 
-    {% endif %}
+    </section>
 
-</section>
+    <!-- CARD PREVIEWS -->
 
     <div class="collection-grid">
 
         {% for card in cards %}
 
-        <div class="collection-card">
+        <div class="collection-card card-preview"
+
+            data-name="{{ card.name }}"
+            data-description="{{ card.description or '' }}"
+
+            data-front="{{ url_for('static', filename='uploads/cards/' + card.front_image) if card.front_image else '' }}"
+
+            data-left="{{ url_for('static', filename='uploads/cards/' + card.inside_left_image) if card.inside_left_image else '' }}"
+
+            data-right="{{ url_for('static', filename='uploads/cards/' + card.inside_right_image) if card.inside_right_image else '' }}"
+
+            data-back="{{ url_for('static', filename='uploads/cards/' + card.back_image) if card.back_image else '' }}">
 
             {% if card.front_image %}
-            <img src="{{ url_for('static', filename='uploads/cards/' + card.front_image) }}">
+            <img src="{{ url_for('static', filename='uploads/cards/' + card.front_image) }}"
+                 alt="{{ card.name }}">
             {% endif %}
 
             <h3>{{ card.name }}</h3>
@@ -36,6 +44,94 @@
 
     </div>
 
+
+    <!-- DETAIL SECTION -->
+
+    <section class="card-detail-section">
+
+        <h2 id="detail-name">
+            {{ cards[0].name }}
+        </h2>
+
+        <div class="detail-gallery">
+
+            {% if cards[0].front_image %}
+            <img id="detail-front"
+                 src="{{ url_for('static', filename='uploads/cards/' + cards[0].front_image) }}">
+            {% endif %}
+
+            <img id="detail-left" style="display:none;">
+
+            <img id="detail-right" style="display:none;">
+
+            {% if cards[0].back_image %}
+            <img id="detail-back"
+                 src="{{ url_for('static', filename='uploads/cards/' + cards[0].back_image) }}">
+            {% endif %}
+
+        </div>
+
+        <p id="detail-description">
+            {{ cards[0].description }}
+        </p>
+
+    </section>
+
 </section>
+
+
+<script>
+
+const previewCards = document.querySelectorAll(".card-preview");
+
+previewCards.forEach(card => {
+
+    card.addEventListener("click", function () {
+
+        document.getElementById("detail-name").textContent =
+            this.dataset.name;
+
+        document.getElementById("detail-description").textContent =
+            this.dataset.description;
+
+        document.getElementById("detail-front").src =
+            this.dataset.front;
+
+        document.getElementById("detail-back").src =
+            this.dataset.back;
+
+        const detailLeft =
+            document.getElementById("detail-left");
+
+        const detailRight =
+            document.getElementById("detail-right");
+
+        if (this.dataset.left) {
+
+            detailLeft.src = this.dataset.left;
+            detailLeft.style.display = "block";
+
+        } else {
+
+            detailLeft.style.display = "none";
+
+        }
+
+        if (this.dataset.right) {
+
+            detailRight.src = this.dataset.right;
+            detailRight.style.display = "block";
+
+        } else {
+
+            detailRight.style.display = "none";
+
+        }
+
+    });
+
+});
+
+</script>
 
 {% endblock %}
