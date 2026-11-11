@@ -13,51 +13,34 @@
     </section>
 
     <!-- CARD PREVIEWS -->
-
+    {% if cards %}
     <div class="collection-grid">
-
         {% for card in cards %}
-
-        <div class="collection-card card-preview"
-
-            data-name="{{ card.name }}"
-            data-description="{{ card.description or '' }}"
-
+        <div class="collection-card card-preview" data-name="{{ card.name }}"
+            data-description="{{ card.description or '' }}" data-price="{{ card.price }}"
             data-front="{{ url_for('static', filename='uploads/cards/' + card.front_image) if card.front_image else '' }}"
-
             data-left="{{ url_for('static', filename='uploads/cards/' + card.inside_left_image) if card.inside_left_image else '' }}"
-
             data-right="{{ url_for('static', filename='uploads/cards/' + card.inside_right_image) if card.inside_right_image else '' }}"
-
             data-back="{{ url_for('static', filename='uploads/cards/' + card.back_image) if card.back_image else '' }}">
 
             {% if card.front_image %}
-            <img src="{{ url_for('static', filename='uploads/cards/' + card.front_image) }}"
-                 alt="{{ card.name }}">
+            <img src="{{ url_for('static', filename='uploads/cards/' + card.front_image) }}" alt="{{ card.name }}">
             {% endif %}
 
             <h3>{{ card.name }}</h3>
-
         </div>
-
         {% endfor %}
-
     </div>
-
-
-    <!-- DETAIL SECTION -->
-
+    <!-- Detail section here -->
     <section class="card-detail-section" id="card-detail-section" style="display:none;">
 
-        <h2 id="detail-name">
-            {{ cards[0].name }}
-        </h2>
+        <h2 id="detail-name"> {{ cards[0].name }} </h2>
+        <p id="detail-description"> {{ cards[0].description }} </p>
 
         <div class="detail-gallery">
 
             {% if cards[0].front_image %}
-            <img id="detail-front"
-                 src="{{ url_for('static', filename='uploads/cards/' + cards[0].front_image) }}">
+            <img id="detail-front" src="{{ url_for('static', filename='uploads/cards/' + cards[0].front_image) }}">
             {% endif %}
 
             <img id="detail-left" style="display:none;">
@@ -65,81 +48,108 @@
             <img id="detail-right" style="display:none;">
 
             {% if cards[0].back_image %}
-            <img id="detail-back"
-                 src="{{ url_for('static', filename='uploads/cards/' + cards[0].back_image) }}">
+            <img id="detail-back" src="{{ url_for('static', filename='uploads/cards/' + cards[0].back_image) }}">
             {% endif %}
 
         </div>
+        <div class="card-specs">
 
-        <p id="detail-description">
-            {{ cards[0].description }}
-        </p>
+            <p>
+                <strong>Dimensions:</strong>
+                <span id="detail-dimensions">
+                    {{ cards[0].dimensions }}
+                </span>
+            </p>
+
+            <p>
+                <strong>Envelope:</strong>
+                <span id="detail-envelope">
+                    {{ cards[0].envelope }}
+                </span>
+            </p>
+
+            <p>
+                <strong>Customization:</strong>
+                <span id="detail-customization">
+                    {{ cards[0].customization }}
+                </span>
+            </p>
+
+        </div>
+        <p id="detail-price"> ₹{{ cards[0].price }} </p>
         <a id="whatsapp-button" class="whatsapp-btn" target="_blank" style="display: none;">
             Enquire on WhatsApp
         </a>
 
     </section>
-
+    {% else %}
+    <div class="empty-collection">
+        <h2>Collection Coming Soon</h2>
+        <p> Something beautiful is being created for this collection.</p>
+    </div>
+    {% endif %}
 </section>
 
 
 <script>
 
-const previewCards = document.querySelectorAll(".card-preview");
-const whatsappButton = document.getElementById("whatsapp-button");
+    const previewCards = document.querySelectorAll(".card-preview");
+    const whatsappButton = document.getElementById("whatsapp-button");
 
-previewCards.forEach(card => {
+    previewCards.forEach(card => {
 
-    card.addEventListener("click", function () {
+        card.addEventListener("click", function () {
 
-        document.getElementById("card-detail-section").style.display = "block";
+            document.getElementById("card-detail-section").style.display = "block";
 
-        document.getElementById("detail-name").textContent = this.dataset.name;
+            document.getElementById("detail-name").textContent = this.dataset.name;
 
-        document.getElementById("detail-description").textContent = this.dataset.description;
+            document.getElementById("detail-description").textContent = this.dataset.description;
 
-        whatsappButton.style.display = "inline-block";
-        
-        whatsappButton.href = "https://wa.me/919705518077?text=" +
-            encodeURIComponent( "Hello, I'm interested in " + this.dataset.name);
+            document.getElementById("detail-price").textContent = "₹" + this.dataset.price;
 
-        document.getElementById("detail-front").src =
-            this.dataset.front;
+            whatsappButton.style.display = "inline-block";
 
-        document.getElementById("detail-back").src =
-            this.dataset.back;
+            whatsappButton.href = "https://wa.me/919705518077?text=" +
+                encodeURIComponent("Hello, I'm interested in " + this.dataset.name);
 
-        const detailLeft =
-            document.getElementById("detail-left");
+            document.getElementById("detail-front").src =
+                this.dataset.front;
 
-        const detailRight =
-            document.getElementById("detail-right");
+            document.getElementById("detail-back").src =
+                this.dataset.back;
 
-        if (this.dataset.left) {
+            const detailLeft =
+                document.getElementById("detail-left");
 
-            detailLeft.src = this.dataset.left;
-            detailLeft.style.display = "block";
+            const detailRight =
+                document.getElementById("detail-right");
 
-        } else {
+            if (this.dataset.left) {
 
-            detailLeft.style.display = "none";
+                detailLeft.src = this.dataset.left;
+                detailLeft.style.display = "block";
 
-        }
+            } else {
 
-        if (this.dataset.right) {
+                detailLeft.style.display = "none";
 
-            detailRight.src = this.dataset.right;
-            detailRight.style.display = "block";
+            }
 
-        } else {
+            if (this.dataset.right) {
 
-            detailRight.style.display = "none";
+                detailRight.src = this.dataset.right;
+                detailRight.style.display = "block";
 
-        }
+            } else {
+
+                detailRight.style.display = "none";
+
+            }
+
+        });
 
     });
-
-});
 
 
 </script>

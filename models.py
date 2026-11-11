@@ -14,14 +14,17 @@ class Card(db.Model):
     category = db.Column(db.String(50), nullable=False)
     slug = db.Column(db.String(120), unique=True)
     description = db.Column(db.Text)
+    dimensions = db.Column(db.String(100))
+    envelope = db.Column(db.String(50))
+    customization = db.Column(db.String(50))
 
     front_image = db.Column(db.String(255))
     inside_left_image = db.Column(db.String(255))
     inside_right_image = db.Column(db.String(255))
     back_image = db.Column(db.String(255))
 
+    price = db.Column(db.Float, default=0)
     featured = db.Column(db.Boolean, default=False)
-
     active = db.Column(db.Boolean, default=True)
 
     created_at = db.Column(

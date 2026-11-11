@@ -379,6 +379,25 @@ section {
     object-fit: cover;
     border-radius: 16px;
 }
+.empty-collection {
+    text-align: center;
+
+    padding: 4rem 2rem;
+
+    background: rgba(255,255,255,.6);
+
+    border-radius: 24px;
+
+    margin: 3rem auto;
+}
+
+.empty-collection h2 {
+    color: var(--gold);
+}
+
+.empty-collection p {
+    color: var(--taupe);
+}
 
 .collection-banner {
 

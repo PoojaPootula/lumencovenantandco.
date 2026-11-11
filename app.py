@@ -81,11 +81,16 @@ def admin_cards():
             description=request.form["description"],
             category=request.form["category"],
 
+            dimensions=request.form["dimensions"],
+            envelope=request.form["envelope"],
+            customization=request.form["customization"],
+
             front_image=front_filename,
             inside_left_image=left_filename,
             inside_right_image=right_filename,
             back_image=back_filename,            
 
+            price=request.form["price"] or 0,
             featured="featured" in request.form,
             active="active" in request.form
         )
