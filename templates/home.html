@@ -45,16 +45,19 @@ Lumen Covenant & Co. | Paperie & Celebrations
             </button>
         </div>
     </div>
-    
+
     <div class="collection-grid">
         {% for collection in collections %}
-        <div class="collection-card" data-category="{{ collection.category }}">
-            {% if collection.cover_photo %}
+        <a href="{{ url_for('view_collection', collection_name=collection.name) }}" class="collection-link">
+
+            <div class="collection-card" data-category="{{ collection.category }}">
+                {% if collection.cover_photo %}
                 <img src="{{ url_for('static', filename='uploads/cards/' + collection.cover_photo) }}"
-             alt="{{ collection.name }}">
-            {% endif %}
-            <h3>{{ collection.name }}</h3>
-        </div>
+                    alt="{{ collection.name }}">
+                {% endif %}
+                <h3>{{ collection.name }}</h3>
+            </div>
+        </a>
         {% endfor %}
     </div>
 </section>

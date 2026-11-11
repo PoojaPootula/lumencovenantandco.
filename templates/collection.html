@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="container">
+    <section class="collection-banner">
+
+    {% if cards and cards[0].category %}
+        <div class="ribbon-wrapper">
+            <div class="ribbon"> {{ collection_name }}  </div>
+
+        </div>
+        <p>
+            Thoughtfully crafted designs for memorable moments.
+        </p>
+
+    {% endif %}
+
+</section>
+
+    <div class="collection-grid">
+
+        {% for card in cards %}
+
+        <div class="collection-card">
+
+            {% if card.front_image %}
+            <img src="{{ url_for('static', filename='uploads/cards/' + card.front_image) }}">
+            {% endif %}
+
+            <h3>{{ card.name }}</h3>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

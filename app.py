@@ -36,6 +36,16 @@ def home():
 
     return render_template("home.html", collections=collections)
 
+@app.route("/collections/<collection_name>")
+def view_collection(collection_name):
+
+    cards = Card.query.filter_by(
+        category=collection_name,
+        active=True
+    ).all()
+
+    return render_template("collection.html", collection_name=collection_name, cards=cards)
+
 @app.route("/admin/collections", methods=["GET", "POST"])
 def admin_collections():
     if request.method == "POST":
