@@ -47,7 +47,7 @@
 
     <!-- DETAIL SECTION -->
 
-    <section class="card-detail-section">
+    <section class="card-detail-section" id="card-detail-section" style="display:none;">
 
         <h2 id="detail-name">
             {{ cards[0].name }}
@@ -74,6 +74,9 @@
         <p id="detail-description">
             {{ cards[0].description }}
         </p>
+        <a id="whatsapp-button" class="whatsapp-btn" target="_blank" style="display: none;">
+            Enquire on WhatsApp
+        </a>
 
     </section>
 
@@ -83,16 +86,22 @@
 <script>
 
 const previewCards = document.querySelectorAll(".card-preview");
+const whatsappButton = document.getElementById("whatsapp-button");
 
 previewCards.forEach(card => {
 
     card.addEventListener("click", function () {
 
-        document.getElementById("detail-name").textContent =
-            this.dataset.name;
+        document.getElementById("card-detail-section").style.display = "block";
 
-        document.getElementById("detail-description").textContent =
-            this.dataset.description;
+        document.getElementById("detail-name").textContent = this.dataset.name;
+
+        document.getElementById("detail-description").textContent = this.dataset.description;
+
+        whatsappButton.style.display = "inline-block";
+        
+        whatsappButton.href = "https://wa.me/919705518077?text=" +
+            encodeURIComponent( "Hello, I'm interested in " + this.dataset.name);
 
         document.getElementById("detail-front").src =
             this.dataset.front;
@@ -131,6 +140,7 @@ previewCards.forEach(card => {
     });
 
 });
+
 
 </script>
 

@@ -105,8 +105,9 @@ section {
 }
 .logo img {
     height: 100px;
-    width: auto;
-    display: block;
+    width: 100px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 .nav-links {
     display: flex;
@@ -231,6 +232,24 @@ section {
     transform: translateY(-8px);
 
     box-shadow: 0 16px 35px rgba(0,0,0,.12);
+}
+.whatsapp-btn {
+
+    display: inline-block;
+
+    margin-top: 1.5rem;
+
+    padding: 12px 24px;
+
+    background: #25D366;
+
+    color: white;
+
+    border-radius: 30px;
+
+    text-decoration: none;
+
+    font-weight: 600;
 }
 #contact {
     background: linear-gradient(
