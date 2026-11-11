@@ -131,4 +131,4 @@ def delete_card(card_id):
     return redirect(url_for("admin_cards"))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port='0.0.0.0', debug=True)
